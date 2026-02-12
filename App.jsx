@@ -1,9 +1,47 @@
+import { useState } from 'react'
 import Navbar from './Navbar'
 import Card from './Card'
 import Footer from './Footer'
 import PortfolioItem from './PortfolioItem'
 
 function App() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState({})
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newErrors = {}
+    
+    if (!formData.name.trim()) newErrors.name = 'Name is required'
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email'
+    }
+    if (!formData.message.trim()) newErrors.message = 'Message is required'
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
+
+    alert('Message sent successfully!')
+    setFormData({ name: '', email: '', message: '' })
+    setErrors({})
+  }
+
   return (
     <>
       <Navbar />
@@ -63,15 +101,39 @@ function App() {
         <div className="container">
             <h2>Let's Build Something Together</h2>
             <p>Ready to elevate your online presence? Reach out to us today.</p>
-            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input 
+                      type="text" 
+                      name="name" 
+                      placeholder="Your Name" 
+                      value={formData.name}
+                      onChange={handleChange}
+                      style={errors.name ? {borderColor: 'red'} : {}}
+                    />
+                    {errors.name && <span style={{color: 'red', fontSize: '0.9rem'}}>{errors.name}</span>}
                 </div>
                 <div className="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required />
+                    <input 
+                      type="email" 
+                      name="email" 
+                      placeholder="Your Email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      style={errors.email ? {borderColor: 'red'} : {}}
+                    />
+                    {errors.email && <span style={{color: 'red', fontSize: '0.9rem'}}>{errors.email}</span>}
                 </div>
                 <div className="form-group">
-                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                    <textarea 
+                      name="message" 
+                      placeholder="Your Message" 
+                      rows="5" 
+                      value={formData.message}
+                      onChange={handleChange}
+                      style={errors.message ? {borderColor: 'red'} : {}}
+                    ></textarea>
+                    {errors.message && <span style={{color: 'red', fontSize: '0.9rem'}}>{errors.message}</span>}
                 </div>
                 <button type="submit" className="btn">Send Message</button>
             </form>

@@ -7,6 +7,15 @@
     --white: #ffffff;
 }
 
+[data-theme="dark"] {
+    --primary: #66b2ff;
+    --secondary: #000428;
+    --accent: #00b4db;
+    --text: #f4f4f4;
+    --light: #1e1e1e;
+    --white: #121212;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -21,6 +30,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text);
+    background-color: var(--white);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -58,6 +69,10 @@ nav {
     color: var(--primary);
 }
 
+[data-theme="dark"] .logo {
+    color: #ffffff;
+}
+
 .nav-links {
     list-style: none;
     display: flex;
@@ -75,6 +90,20 @@ nav {
 }
 
 .nav-links a:hover {
+    color: var(--primary);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: color 0.3s;
+}
+
+.theme-toggle:hover {
     color: var(--primary);
 }
 
