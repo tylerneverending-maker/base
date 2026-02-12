@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import Card from './Card'
 import Footer from './Footer'
 import PortfolioItem from './PortfolioItem'
+import ScrollToTop from './ScrollToTop'
 
 function App() {
   const [formData, setFormData] = useState({
@@ -156,6 +157,7 @@ function App() {
       </section>
 
       <Footer />
+      <ScrollToTop />
     </>
   )
 }
