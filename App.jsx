@@ -4,6 +4,7 @@ import Card from './Card'
 import Footer from './Footer'
 import PortfolioItem from './PortfolioItem'
 import ScrollToTop from './ScrollToTop'
+import Testimonials from './Testimonials'
 
 function App() {
   const [formData, setFormData] = useState({
@@ -112,6 +113,8 @@ function App() {
             </div>
         </div>
       </section>
+
+      <Testimonials />
 
       <section id="contact" className="contact-section">
         <div className="container">
