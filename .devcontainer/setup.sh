@@ -35,7 +35,7 @@ curl -fsSL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSIO
 chmod +x /usr/local/bin/docker-compose
 
 ## install nodejs
-curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 apt-get install -y nodejs
 npm install -g npm
 npm install -g pnpm
