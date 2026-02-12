@@ -51,6 +51,7 @@ apt-get install -y yarn
 apt-get install -y \
   python3 \
   python3-pip
+pip3 install fastapi "uvicorn[standard]" gunicorn jinja2 python-multipart
 
 ## install golang
 apt-add-repository -y ppa:longsleep/golang-backports
