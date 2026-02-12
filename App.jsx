@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import Card from './Card'
 import Footer from './Footer'
@@ -11,6 +11,21 @@ function App() {
     message: ''
   })
   const [errors, setErrors] = useState({})
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => hiddenElements.forEach((el) => observer.unobserve(el));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -47,7 +62,7 @@ function App() {
       <Navbar />
 
       <section id="home" className="hero">
-        <div className="container">
+        <div className="container hidden">
             <h1>Building Strong Digital Foundations</h1>
             <p>We craft stunning websites and robust applications that bridge the gap between your brand and your audience.</p>
             <a href="#contact" className="btn">Start Your Project</a>
@@ -56,8 +71,8 @@ function App() {
 
       <section id="services" className="services">
         <div className="container">
-            <h2>Our Expertise</h2>
-            <div className="grid">
+            <h2 className="hidden">Our Expertise</h2>
+            <div className="grid hidden">
                 <Card 
                     title="Web Design" 
                     description="User-centric interfaces designed to engage and convert." 
@@ -76,8 +91,8 @@ function App() {
 
       <section id="work" className="work">
         <div className="container">
-            <h2>Our Recent Work</h2>
-            <div className="portfolio-grid">
+            <h2 className="hidden">Our Recent Work</h2>
+            <div className="portfolio-grid hidden">
                 <PortfolioItem 
                     image="https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                     title="Project Alpha"
@@ -99,9 +114,9 @@ function App() {
 
       <section id="contact" className="contact-section">
         <div className="container">
-            <h2>Let's Build Something Together</h2>
-            <p>Ready to elevate your online presence? Reach out to us today.</p>
-            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <h2 className="hidden">Let's Build Something Together</h2>
+            <p className="hidden">Ready to elevate your online presence? Reach out to us today.</p>
+            <form className="contact-form hidden" onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
                     <input 
                       type="text" 
