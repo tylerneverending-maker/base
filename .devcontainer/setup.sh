@@ -37,6 +37,7 @@ chmod +x /usr/local/bin/docker-compose
 ## install nodejs
 curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 apt-get install -y nodejs
+npm install -g npm
 
 ## install yarn
 curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
