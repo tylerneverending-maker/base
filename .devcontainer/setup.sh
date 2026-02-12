@@ -35,9 +35,11 @@ curl -fsSL "https://github.com/docker/compose/releases/download/${COMPOSE_VERSIO
 chmod +x /usr/local/bin/docker-compose
 
 ## install nodejs
-curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 apt-get install -y nodejs
 npm install -g npm
+npm install -g pnpm
+npm install -g typescript
 
 ## install yarn
 curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -77,6 +79,11 @@ curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
 apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 apt-get update
 apt-get install -y terraform
+
+## install java and maven
+apt-get install -y \
+  openjdk-11-jdk \
+  maven
 
 ## setup and install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
